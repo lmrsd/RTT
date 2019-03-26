@@ -1,0 +1,49 @@
+{
+	"rootDir" : "LM_Rtt",
+	"defaultDir" : "User",
+	"customDir" : "",
+
+	"previewDir" : "preview",
+	"previewType" : ".tga",
+
+	"lastPref" : {},
+	"lastPos" : {},
+	
+	"RenderSettingsHightDefault" : {
+		"probabilisticLights": 2,
+		"probabilisticCount" : 16,
+		"filterMaps" : true ,
+		"imageSampler" : 1,
+		"minShadingRate" : 6,
+		"minSubdiv" : 1,
+		"maxSubdiv" : 32,
+		"BucketWidth": 24,
+		"noiseThreshold" : 0.008 ,
+		"clampOutut" : false,
+		"clampLevel" : 2.2,
+		"LightCacheSubdivs" : 3000
+	},
+
+	"RenderSettingsMidDefault" : {},
+
+	"RenderSettingsDraftDefault" : {
+		"probabilisticLights": 2,
+		"probabilisticCount" : 4,
+		"filterMaps" : false ,
+		"imageSampler" : 1,
+		"minShadingRate" : 6,
+		"minSubdiv" : 1,
+		"maxSubdiv" : 8,
+		"BucketWidth": 48,
+		"noiseThreshold" : 0.05 ,
+		"clampOutut" : true,
+		"clampLevel" : 1,
+		"LightCacheSubdivs" : 500
+	},
+	
+	"RenderSettingsHightCustom" : {},
+
+	"RenderSettingsMidCustom" : {},
+
+	"RenderSettingsDrafCustom" : {}
+}
