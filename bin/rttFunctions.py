@@ -79,20 +79,6 @@ def changeRenderSettings(dictState,settings,ipr=False):
 		vRay.imageSampler_renderMask_type = 2
 	else :
 		vRay.imageSampler_renderMask_type = dictState['isolate']
-	#Output
-	#create bitmap and save him !
-	#renderbm = 
-	"""
-	b = CoronaRenderer.CoronaFp.getVfbContent 0 false false --more info here: https://corona-renderer.com/wiki/maxscript
-	b.filename = p
-	save b quiet:true
-	close b; free b -- release it from the ram without waiting the garbage collector
-	"""
-	#save <bitmap> [frame:<integer>] [gamma:{#auto|#default|<float>}] [quiet:<bool>] 
-	#saveimage  -from vraybuffer
-	#cmds.close(renderbm) 
-	#print initPreviewDir()
-	
 	#Probalistic
 	vRay.options_probabilisticLights = dictState['probabilisticLights']
 	vRay.options_probabilisticLightsCount = dictState['probabilisticCount']
@@ -118,6 +104,16 @@ def changeRenderSettings(dictState,settings,ipr=False):
 	
 	#IPR
 	vRay.ipr_progressiveMode = ipr
+	
+	#Debug Shading Mode
+	if dictState['debug'] :
+		reMgr.SetElementsActive(True)
+		normalPass = cmds.VRayNormals(elementname="[rtt]_Normals")
+		uvPass = cmds.VRayNormals(elementname="[rtt]_Normals")
+		OccPass = cmds.VRayNormals(elementname="[rtt]_Normals")
+		#Add Passes
+		reMgr.AddRenderElement(normalPass)
+
 	#End of functin Update in scene dialog
 	cmds.renderSceneDialog.commit()
 	cmds.renderSceneDialog.update()

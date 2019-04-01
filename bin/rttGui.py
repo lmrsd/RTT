@@ -25,11 +25,12 @@ class RttWidget(baseType, uiType) :
 		self.setupUi(self)
 		self.setUpConnections()
 		MaxPlus.AttachQWidgetToMax(self)
+		self.guiBindIcons()
 		self.storedSettings = dict()
 		self.setSettings = dict()
 
-
 	def setUpConnections(self):
+
 		self.openVfbBtn.clicked.connect(rtt.showlast)
 		self.historyBtn.clicked.connect(rtt.openHistory)
 		#Prod Btn
@@ -38,13 +39,55 @@ class RttWidget(baseType, uiType) :
 		self.prodQuartBtn.clicked.connect(partial(self.launchRender,"full",size=0.25,ipr=False))
 		#Draft Btn
 		self.draftFullBtn.clicked.connect(partial(self.launchRender,"draft",size=1,ipr=False))
-		self.darftHalfBtn.clicked.connect(partial(self.launchRender,"draft",size=0.5,ipr=False))
+		self.draftHalfBtn.clicked.connect(partial(self.launchRender,"draft",size=0.5,ipr=False))
 		self.draftQuartBtn.clicked.connect(partial(self.launchRender,"draft",size=0.25,ipr=False))
 		#
 		self.iprBtn.clicked.connect(partial(self.launchRender,"draft",size=1,ipr=True))
 
 	def closeEvent(self,e):
 		return
+
+	def guiBindIcons(self):
+		imgrootDir = os.path.dirname( os.path.dirname(os.path.abspath(__file__)) )
+		print imgrootDir
+		#Prod Full
+		prodFullIcon = QtGui.QIcon()
+		prodFullIconPath = os.path.join(imgrootDir,"gui","img","prodFull.png")
+		prodFullIcon.addPixmap(QtGui.QPixmap(prodFullIconPath))
+		self.prodFullBtn.setIcon(prodFullIcon)
+		#Prod Mid
+		prodMidIcon = QtGui.QIcon()
+		prodMidIconPath = os.path.join(imgrootDir,"gui","img","prodMid.png")
+		prodMidIcon.addPixmap(QtGui.QPixmap(prodMidIconPath))
+		self.prodHalfBtn.setIcon(prodMidIcon)
+		#Prod Quarter
+		prodQuarterIcon = QtGui.QIcon()
+		prodQuarterIconPath = os.path.join(imgrootDir,"gui","img","prodQuarter.png")
+		prodQuarterIcon.addPixmap(QtGui.QPixmap(prodQuarterIconPath))
+		self.prodQuartBtn.setIcon(prodQuarterIcon)
+		#Draft Full
+		draftFullIcon = QtGui.QIcon()
+		draftFullIconPath = os.path.join(imgrootDir,"gui","img","draftFull.png")
+		draftFullIcon.addPixmap(QtGui.QPixmap(draftFullIconPath))
+		self.draftFullBtn.setIcon(draftFullIcon)
+		#Draft Mid
+		draftMidIcon = QtGui.QIcon()
+		draftMidIconPath = os.path.join(imgrootDir,"gui","img","draftMid.png")
+		draftMidIcon.addPixmap(QtGui.QPixmap(draftMidIconPath))
+		self.draftHalfBtn.setIcon(draftMidIcon)
+		#Draft Quarter
+		draftQuarterIcon = QtGui.QIcon()
+		draftQuarterIconPath = os.path.join(imgrootDir,"gui","img","draftQuarter.png")
+		draftQuarterIcon.addPixmap(QtGui.QPixmap(draftQuarterIconPath))
+		self.draftQuartBtn.setIcon(draftQuarterIcon)
+		#IPR
+		iprIcon = QtGui.QIcon()
+		iprIconPath = os.path.join(imgrootDir,"gui","img","iprFull.png")
+		iprIcon.addPixmap(QtGui.QPixmap(iprIconPath))
+		self.iprBtn.setIcon(iprIcon)
+
+
+        
 
 	def collectStates(self):
 		for i in range(self.optionGlay.count()):
@@ -89,13 +132,14 @@ class RttWidget(baseType, uiType) :
 		cmds.renderHeight = size * self.storedSettings['outHeight']
 		#DisableSave
 		cmds.rendSaveFile = False
-		#Update rendersettings dialog ?
 
+		#Update rendersettings dialog ?
 		cmds.renderSceneDialog.commit()
 		cmds.renderSceneDialog.update()
 		#
 
 		MaxPlus.RenderExecute.QuickRender()
+		#Save Bitmap current Render
 		bm = cmds.GetLastRenderedImage()
 		bm.filename =rtt.previewName(rtt.initPreviewDir())
 		cmds.save(bm)

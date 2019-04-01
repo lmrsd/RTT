@@ -9,20 +9,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>230</width>
-    <height>465</height>
+    <width>150</width>
+    <height>500</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>230</width>
-    <height>397</height>
+    <width>150</width>
+    <height>500</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>230</width>
-    <height>524287</height>
+    <width>150</width>
+    <height>500</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -34,15 +34,26 @@
    </property>
    <property name="maximumSize">
     <size>
-     <width>230</width>
+     <width>150</width>
      <height>16777215</height>
     </size>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_3">
     <item>
      <widget class="QLabel" name="presetLbl">
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>8</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:rgb(230, 230, 230);</string>
+      </property>
       <property name="text">
-       <string>Render Preset</string>
+       <string>Render Preset :</string>
       </property>
      </widget>
     </item>
@@ -53,50 +64,167 @@
       </property>
       <item row="1" column="2">
        <widget class="QToolButton" name="draftQuartBtn">
+        <property name="minimumSize">
+         <size>
+          <width>35</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>35</width>
+          <height>35</height>
+         </size>
+        </property>
         <property name="text">
          <string>d1/4</string>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
         </property>
        </widget>
       </item>
       <item row="0" column="0">
        <widget class="QToolButton" name="prodFullBtn">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>35</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>35</width>
+          <height>35</height>
+         </size>
+        </property>
         <property name="text">
          <string>f1</string>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
         </property>
        </widget>
       </item>
       <item row="1" column="0">
        <widget class="QToolButton" name="draftFullBtn">
+        <property name="minimumSize">
+         <size>
+          <width>35</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>35</width>
+          <height>35</height>
+         </size>
+        </property>
         <property name="text">
          <string>d1</string>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QToolButton" name="darftHalfBtn">
+       <widget class="QToolButton" name="draftHalfBtn">
+        <property name="minimumSize">
+         <size>
+          <width>35</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>35</width>
+          <height>35</height>
+         </size>
+        </property>
         <property name="text">
          <string>d1/2</string>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
         </property>
        </widget>
       </item>
       <item row="0" column="2">
        <widget class="QToolButton" name="prodQuartBtn">
+        <property name="minimumSize">
+         <size>
+          <width>35</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>35</width>
+          <height>35</height>
+         </size>
+        </property>
         <property name="text">
          <string>f1/4</string>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
        <widget class="QToolButton" name="prodHalfBtn">
+        <property name="minimumSize">
+         <size>
+          <width>35</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>35</width>
+          <height>35</height>
+         </size>
+        </property>
         <property name="text">
          <string>f1/2</string>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
         </property>
        </widget>
       </item>
       <item row="2" column="0" colspan="3">
-       <widget class="QPushButton" name="iprBtn">
+       <widget class="QToolButton" name="iprBtn">
         <property name="text">
          <string>IPR</string>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
         </property>
        </widget>
       </item>
@@ -107,18 +235,31 @@
       <property name="orientation">
        <enum>Qt::Vertical</enum>
       </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Maximum</enum>
+      </property>
       <property name="sizeHint" stdset="0">
        <size>
         <width>20</width>
-        <height>40</height>
+        <height>30</height>
        </size>
       </property>
      </spacer>
     </item>
     <item>
      <widget class="QLabel" name="optionLbl">
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:rgb(230, 230, 230);</string>
+      </property>
       <property name="text">
-       <string>Render Option</string>
+       <string>Render Option :</string>
       </property>
      </widget>
     </item>
@@ -126,8 +267,26 @@
      <layout class="QGridLayout" name="optionGlay">
       <item row="0" column="1">
        <widget class="QToolButton" name="dofBtn">
+        <property name="minimumSize">
+         <size>
+          <width>35</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>35</width>
+          <height>35</height>
+         </size>
+        </property>
         <property name="text">
          <string>dof</string>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
         </property>
         <property name="checkable">
          <bool>true</bool>
@@ -136,8 +295,26 @@
       </item>
       <item row="1" column="0">
        <widget class="QToolButton" name="dispBtn">
+        <property name="minimumSize">
+         <size>
+          <width>35</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>35</width>
+          <height>35</height>
+         </size>
+        </property>
         <property name="text">
          <string>disp</string>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
         </property>
         <property name="checkable">
          <bool>true</bool>
@@ -146,8 +323,26 @@
       </item>
       <item row="0" column="2">
        <widget class="QToolButton" name="mobBtn">
+        <property name="minimumSize">
+         <size>
+          <width>35</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>35</width>
+          <height>35</height>
+         </size>
+        </property>
         <property name="text">
          <string>moblur</string>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
         </property>
         <property name="checkable">
          <bool>true</bool>
@@ -156,8 +351,26 @@
       </item>
       <item row="2" column="2">
        <widget class="QToolButton" name="atmoBtn">
+        <property name="minimumSize">
+         <size>
+          <width>35</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>35</width>
+          <height>35</height>
+         </size>
+        </property>
         <property name="text">
          <string>atmo</string>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
         </property>
         <property name="checkable">
          <bool>true</bool>
@@ -166,8 +379,26 @@
       </item>
       <item row="2" column="0">
        <widget class="QToolButton" name="overrideBtn">
+        <property name="minimumSize">
+         <size>
+          <width>35</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>35</width>
+          <height>35</height>
+         </size>
+        </property>
         <property name="text">
          <string>OverMtl</string>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
         </property>
         <property name="checkable">
          <bool>true</bool>
@@ -176,8 +407,26 @@
       </item>
       <item row="1" column="2">
        <widget class="QToolButton" name="forestBtn">
+        <property name="minimumSize">
+         <size>
+          <width>35</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>35</width>
+          <height>35</height>
+         </size>
+        </property>
         <property name="text">
          <string>forestPack</string>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
         </property>
         <property name="checkable">
          <bool>true</bool>
@@ -186,8 +435,26 @@
       </item>
       <item row="2" column="1">
        <widget class="QToolButton" name="renderElemBtn_2">
+        <property name="minimumSize">
+         <size>
+          <width>35</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>35</width>
+          <height>35</height>
+         </size>
+        </property>
         <property name="text">
          <string>RenderElem</string>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
         </property>
         <property name="checkable">
          <bool>true</bool>
@@ -196,8 +463,26 @@
       </item>
       <item row="0" column="0">
        <widget class="QToolButton" name="vfbBtn">
+        <property name="minimumSize">
+         <size>
+          <width>35</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>35</width>
+          <height>35</height>
+         </size>
+        </property>
         <property name="text">
          <string>vfb</string>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
         </property>
         <property name="checkable">
          <bool>true</bool>
@@ -209,8 +494,26 @@
       </item>
       <item row="1" column="1">
        <widget class="QToolButton" name="hairBtn">
+        <property name="minimumSize">
+         <size>
+          <width>35</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>35</width>
+          <height>35</height>
+         </size>
+        </property>
         <property name="text">
          <string>hair</string>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
         </property>
         <property name="checkable">
          <bool>true</bool>
@@ -219,8 +522,26 @@
       </item>
       <item row="3" column="0">
        <widget class="QToolButton" name="isolateBtn">
+        <property name="minimumSize">
+         <size>
+          <width>35</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>35</width>
+          <height>35</height>
+         </size>
+        </property>
         <property name="text">
          <string>Isolate Sel.Obj</string>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
         </property>
         <property name="checkable">
          <bool>true</bool>
@@ -229,8 +550,26 @@
       </item>
       <item row="3" column="1">
        <widget class="QToolButton" name="debugBtn">
+        <property name="minimumSize">
+         <size>
+          <width>35</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>35</width>
+          <height>35</height>
+         </size>
+        </property>
         <property name="text">
          <string>Debug Shading Mode</string>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
         </property>
         <property name="checkable">
          <bool>true</bool>
@@ -244,10 +583,13 @@
       <property name="orientation">
        <enum>Qt::Vertical</enum>
       </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Maximum</enum>
+      </property>
       <property name="sizeHint" stdset="0">
        <size>
         <width>20</width>
-        <height>40</height>
+        <height>30</height>
        </size>
       </property>
      </spacer>
@@ -282,10 +624,13 @@
       <property name="orientation">
        <enum>Qt::Vertical</enum>
       </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Maximum</enum>
+      </property>
       <property name="sizeHint" stdset="0">
        <size>
         <width>20</width>
-        <height>40</height>
+        <height>30</height>
        </size>
       </property>
      </spacer>
@@ -296,6 +641,19 @@
        <string>Global Options</string>
       </property>
      </widget>
+    </item>
+    <item>
+     <spacer name="verticalSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
     </item>
    </layout>
   </widget>
