@@ -1,0 +1,11 @@
+<RCC>
+  <qresource prefix="icons">
+    <file>img/iprFull.png</file>
+    <file>img/draftQuarter.png</file>
+    <file>img/draftMid.png</file>
+    <file>img/draftFull.png</file>
+    <file>img/prodFull.png</file>
+    <file>img/prodMid.png</file>
+    <file>img/prodQuarter.png</file>
+  </qresource>
+</RCC>

@@ -24,7 +24,20 @@
 		"LightCacheSubdivs" : 3000
 	},
 
-	"RenderSettingsMidDefault" : {},
+	"RenderSettingsMidDefault" : {
+		"probabilisticLights": 2,
+		"probabilisticCount" : 8,
+		"filterMaps" : true ,
+		"imageSampler" : 1,
+		"minShadingRate" : 6,
+		"minSubdiv" : 1,
+		"maxSubdiv" : 16,
+		"BucketWidth": 48,
+		"noiseThreshold" : 0.02 ,
+		"clampOutut" : true,
+		"clampLevel" : 2.2,
+		"LightCacheSubdivs" : 1000
+	},
 
 	"RenderSettingsDraftDefault" : {
 		"probabilisticLights": 2,
