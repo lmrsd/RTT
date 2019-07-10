@@ -1,4 +1,6 @@
-import os,json
+import os
+import json
+import subprocess
 from pymxs import runtime as cmds
 vRay = cmds.renderers.current
 
@@ -27,21 +29,41 @@ def getRenderOption(cdict,**kwargs):
 	cdict.update(kwargs.items())
 	# add if same key not update
 
+def keepRegionVfb(width,height):
+	if cmds.vrayVFBGetRegionEnabled():
+		curWidth = cmds.vrayVFBGetChannelBitmap(1).width
+		curHeight = cmds.vrayVFBGetChannelBitmap(1).height
+		curRegion = cmds.vrayVFBGetRegion()
+		#
+		nwLeft = int(width*float(curRegion[0])/curWidth)
+		nwTop = int(height*float(curRegion[1])/curHeight)
+		nwRight = int(width*float(curRegion[2])/curWidth)
+		nwBottom = int(height*float(curRegion[3])/curHeight)
+
 def showlast():
 	vRay.showLastVFB()
 
-def changeRenderSettings(dictState,settings):
-	#V-Ray Part
+def openHistory():
+	previewDir = os.path.join(rootDir,configData['previewDir'])
+	os.startfile(previewDir) 
+
+def changeRenderSettings(dictState,settings,ipr=False):
+	#globals
+	reMgr = cmds.maxOps.getCurRenderElementMgr()	
+
+	#Full
 	if settings == 'full' :
 		for i in configData['RenderSettingsHightDefault'] :
-			print i
-			print configData['RenderSettingsHightDefault'][i]
 			dictState[i] = configData['RenderSettingsHightDefault'][i]
-		print dictState
+	#Mid
 	elif settings == 'mid' :
-		return
+		for i in configData['RenderSettingsMidDefault'] :
+			dictState[i] = configData['RenderSettingsMidDefault'][i]
+	#Draft		
 	elif settings == 'draft' :
-		return
+		for i in configData['RenderSettingsDraftDefault'] :
+			dictState[i] = configData['RenderSettingsDraftDefault'][i]
+	#Default
 	elif settings == 'default' :
 		return
 
@@ -53,22 +75,22 @@ def changeRenderSettings(dictState,settings):
 	vRay.moblur_on = dictState['mob']
 	#Displace
 	vRay.options_displacement = dictState['disp']
+	#renderElements
+	reMgr.SetElementsActive(dictState['renderElem'])
 	#Atmosphere
-	cmds.rendAtmosphere = False
-	cmds.renderSceneDialog.commit()
+	cmds.rendAtmosphere = dictState['atmo']
+	print ('##ATMO : '+ str(dictState['atmo']))
+	cmds.rendAtmosphere = dictState['atmo']
 	#Override
 	vRay.options_overrideMtl_on = dictState['override']
 	BaseMat = cmds.vRayMtl()
+	BaseMat.name="OVERRIDE_MAT"
 	vRay.options_overrideMtl_mtl = BaseMat
 	#Isolate
 	if dictState['isolate'] == True :
 		vRay.imageSampler_renderMask_type = 2
 	else :
 		vRay.imageSampler_renderMask_type = dictState['isolate']
-	#Output
-	#create bitmap and save him !
-	print initPreviewDir()
-	"""
 	#Probalistic
 	vRay.options_probabilisticLights = dictState['probabilisticLights']
 	vRay.options_probabilisticLightsCount = dictState['probabilisticCount']
@@ -91,16 +113,58 @@ def changeRenderSettings(dictState,settings):
 	vRay.colorMapping_clampLevel = dictState['clampLevel']
 	#LightCache
 	vRay.lightcache_subdivs = dictState['LightCacheSubdivs']
-	"""
+	
+	#IPR
+	vRay.ipr_progressiveMode = ipr
+	
+	#Debug Shading Mode
+	if dictState['debug'] :
+		reMgr.SetElementsActive(True)
+		normalPass = cmds.VRayNormals(elementname="[rtt]_Normals")
+		normalPass.elementname = "[rtt]_Normals"
+		#Uv
+		uvTex = cmds.VraySamplerInfoTex()
+		uvTex.name = "[rtt]_Uvs"
+		uvTex.type = 4
+		uvPass = cmds.VRayExtraTex(elementname="[rtt]_Uvs")
+		uvPass.texture = uvTex
+		uvPass.elementname = "[rtt]_Uvs"
+		#Occ
+		aoTex = cmds.VrayDirt()
+		aoTex.name = "[rtt]_AO"
+		aoTex.unoccluded_color = cmds.color(232,232,232)
+		aoPass = cmds.VRayExtraTex(elementname="[rtt]_Occ")
+		aoPass.texture = aoTex
+		aoPass.elmentname = "[rtt]_Occ"
+		#Add Passes
+		reMgr.AddRenderElement(normalPass)
+		reMgr.AddRenderElement(uvPass)
+		reMgr.AddRenderElement(aoPass)
+
+		# Render overide light material + texture
+		vRay.options_overrideMtl_on = True
+		customTexMat = cmds.vRayLightMtl()
+		customTexMat.name="OVERRIDE_TEX"
+		vRay.options_overrideMtl_mtl = customTexMat
+
 	#End of functin Update in scene dialog
 	cmds.renderSceneDialog.commit()
-	#cmds.renderSceneDialog.update()
+	cmds.renderSceneDialog.update()
 
 # FINAL
-
+def deleteRttPasses():
+	print "starting delete...."
+	reMgr = cmds.maxOps.getCurRenderElementMgr()
+	elemCount = reMgr.numrenderelements()
+	for i in range(0,elemCount-1):
+		el = reMgr.GetRenderElement(i)
+		#print (el.elementName)
+		if len((el.elementName).split("[rtt]")) > 1 :
+			reMgr.RemoveRenderElement(el)
 
 def initPref():
 	getRderOpt = dict()
+	reMgr = cmds.maxOps.getCurRenderElementMgr()	
 	# Get Global Option from Render Settings
 	getRenderOption(getRderOpt,vfb=vRay.output_on)
 	getRenderOption(getRderOpt,dof=vRay.dof_on)
@@ -109,6 +173,7 @@ def initPref():
 	getRenderOption(getRderOpt,over=vRay.options_overrideMtl_on)
 	getRenderOption(getRderOpt,outWidth=cmds.renderWidth,outHeight=cmds.renderHeight)
 	getRenderOption(getRderOpt,isolate = vRay.imageSampler_renderMask_type)
+	getRenderOption(getRderOpt,renderElem=reMgr.GetElementsActive())
 	getRenderOption(getRderOpt,outputFile=cmds.rendOutputFilename)
 	getRenderOption(getRderOpt,outputSave=cmds.rendSaveFile)
 	# Vray Option from render Settings
@@ -128,3 +193,5 @@ def initPref():
 	
 	print getRderOpt
 	return getRderOpt
+
+keepRegionVfb(1920,800)
